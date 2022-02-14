@@ -1,18 +1,28 @@
 package kz.stolik.servicebackendstolik.model.entity.base;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
 
+import static kz.stolik.servicebackendstolik.constants.swagger.LocalNameEntitySwaggerConstants.NAME_RU_DESCRIPTION;
+import static kz.stolik.servicebackendstolik.constants.swagger.LocalNameEntitySwaggerConstants.NAME_RU_EXAMPLE;
+
+import static kz.stolik.servicebackendstolik.constants.swagger.LocalNameEntitySwaggerConstants.NAME_KK_EXAMPLE;
+import static kz.stolik.servicebackendstolik.constants.swagger.LocalNameEntitySwaggerConstants.NAME_KK_DESCRIPTION;
+
+import static kz.stolik.servicebackendstolik.constants.swagger.LocalNameEntitySwaggerConstants.NAME_EN_DESCRIPTION;
+import static kz.stolik.servicebackendstolik.constants.swagger.LocalNameEntitySwaggerConstants.NAME_EN_EXAMPLE;
+
 @MappedSuperclass
 @Getter
 @Setter
 public class LocalNameEntity extends BaseEntity{
+    @Schema(description = NAME_RU_DESCRIPTION, example = NAME_RU_EXAMPLE, required = true)
     private String nameRu;
-    @ApiModelProperty(value = "Наименование ингредиента на каз", name = "nameKk", dataType = "String", example = "Тұз")
+    @Schema(description = NAME_KK_DESCRIPTION, example = NAME_KK_EXAMPLE, required = true)
     private String nameKk;
-    @ApiModelProperty(value = "Наименование ингредиента на англ", name = "nameEn", dataType = "String", example = "Salt")
+    @Schema(description = NAME_EN_DESCRIPTION, example = NAME_EN_EXAMPLE)
     private String nameEn;
 }

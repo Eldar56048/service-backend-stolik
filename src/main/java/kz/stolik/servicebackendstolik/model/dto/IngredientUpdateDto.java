@@ -18,14 +18,15 @@ import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwagger
 import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_EN_DESCRIPTION;
 import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_EN_EXAMPLE;
 import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.INGREDIENT_UPDATE_DTO_DESCRIPTION;
-
+import static kz.stolik.servicebackendstolik.constants.validation.IngredientValidationConstants.FIELD_ID_REQUIRED_MESSAGE;
+import static kz.stolik.servicebackendstolik.constants.validation.IngredientValidationConstants.FIELD_ID_VALUE_SHOULD_BE_POSITIVE_MESSAGE;
 
 @Getter
 @Setter
 @Schema(description = INGREDIENT_UPDATE_DTO_DESCRIPTION)
 public class IngredientUpdateDto {
-    @NotNull
-    @Positive
+    @NotNull(message = FIELD_ID_REQUIRED_MESSAGE)
+    @Positive(message = FIELD_ID_VALUE_SHOULD_BE_POSITIVE_MESSAGE)
     private Long id;
     @IngredientName(field = FIELD_NAME_RU)
     @Schema(description = NAME_RU_DESCRIPTION, example = NAME_RU_EXAMPLE, required = true)
