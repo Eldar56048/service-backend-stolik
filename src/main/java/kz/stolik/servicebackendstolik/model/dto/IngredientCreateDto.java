@@ -9,25 +9,29 @@ import static kz.stolik.servicebackendstolik.constants.base.IngredientBaseConsta
 import static kz.stolik.servicebackendstolik.constants.base.IngredientBaseConstants.FIELD_NAME_RU;
 import static kz.stolik.servicebackendstolik.constants.base.IngredientBaseConstants.FIELD_NAME_KK;
 
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_RU_DESCRIPTION;
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_RU_EXAMPLE;
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_KK_DESCRIPTION;
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_KK_EXAMPLE;
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_EN_DESCRIPTION;
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.NAME_EN_EXAMPLE;
-import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.INGREDIENT_CREATE_DTO_DESCRIPTION;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.FIELD_NAME_RU_DESCRIPTION;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.FIELD_NAME_RU_EXAMPLE;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.FIELD_NAME_KK_DESCRIPTION;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.FIELD_NAME_KK_EXAMPLE;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.FIELD_NAME_EN_DESCRIPTION;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.FIELD_NAME_EN_EXAMPLE;
+import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwaggerConstants.INGREDIENT_CREATE_DTO_TITLE;
 
 @Getter
 @Setter
-@Schema(description = INGREDIENT_CREATE_DTO_DESCRIPTION)
+@Schema(title = INGREDIENT_CREATE_DTO_TITLE)
 public class IngredientCreateDto {
-    @IngredientName(field = FIELD_NAME_RU)
-    @Schema(description = NAME_RU_DESCRIPTION, example = NAME_RU_EXAMPLE, required = true)
+
+    @IngredientName(field = FIELD_NAME_RU, required = true)
+    @Schema(description = FIELD_NAME_RU_DESCRIPTION, example = FIELD_NAME_RU_EXAMPLE, required = true)
     private String nameRu;
+
     @IngredientName(field = FIELD_NAME_KK)
-    @Schema(description = NAME_KK_DESCRIPTION, example = NAME_KK_EXAMPLE, nullable = true)
+    @Schema(description = FIELD_NAME_KK_DESCRIPTION, example = FIELD_NAME_KK_EXAMPLE, nullable = true)
     private String nameKk;
+
     @IngredientName(field = FIELD_NAME_EN)
-    @Schema(description = NAME_EN_DESCRIPTION, example = NAME_EN_EXAMPLE, nullable = true)
+    @Schema(description = FIELD_NAME_EN_DESCRIPTION, example = FIELD_NAME_EN_EXAMPLE, nullable = true)
     private String nameEn;
+
 }

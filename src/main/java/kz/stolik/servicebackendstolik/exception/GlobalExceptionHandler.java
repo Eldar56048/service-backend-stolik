@@ -29,6 +29,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<?> handleCustomException(CustomException customException, WebRequest request) {
+        LOGGER.error(String.valueOf(customException.getMessage()));
+        ErrorDetails errorDetails = new ErrorDetails(customException.getHttpStatus().value(), new Date(), customException.getMessage(), request.getDescription(false), customException.getCode());
+        return new ResponseEntity(errorDetails, customException.getHttpStatus());
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(

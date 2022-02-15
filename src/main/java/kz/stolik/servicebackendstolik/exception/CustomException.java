@@ -6,12 +6,13 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-public class Exception extends RuntimeException{
+public class CustomException extends RuntimeException{
     private static final long serialVersionUID = 1L;
     private String code;
     private HttpStatus httpStatus;
-    public Exception(String message, String code, HttpStatus httpStatus) {
+    public CustomException(String message, String code, HttpStatus httpStatus) {
         super(message);
         this.code = code;
+        this.httpStatus = httpStatus;
     }
 }

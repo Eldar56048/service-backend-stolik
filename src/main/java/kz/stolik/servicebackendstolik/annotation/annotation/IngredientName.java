@@ -17,6 +17,7 @@ import static kz.stolik.servicebackendstolik.constants.validation.IngredientVali
 public @interface IngredientName {
     String message() default INGREDIENT_NAME_ALREADY_EXISTS_MESSAGE;
     String field();
+    boolean required() default false;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

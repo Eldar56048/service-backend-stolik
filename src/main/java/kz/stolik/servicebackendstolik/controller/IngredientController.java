@@ -2,8 +2,8 @@ package kz.stolik.servicebackendstolik.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import kz.stolik.servicebackendstolik.exception.domain.BodyObjectIdDoesNotMatchRequestIdException;
-import kz.stolik.servicebackendstolik.exception.domain.IngredientNotFoundException;
+import kz.stolik.servicebackendstolik.exception.domain.BodyObjectIdDoesNotMatchRequestIdCustomException;
+import kz.stolik.servicebackendstolik.exception.domain.IngredientNotFoundCustomException;
 import kz.stolik.servicebackendstolik.model.dto.IngredientCreateDto;
 import kz.stolik.servicebackendstolik.model.dto.IngredientUpdateDto;
 import kz.stolik.servicebackendstolik.model.dto.SearchCriteriaDto;
@@ -28,7 +28,6 @@ import static kz.stolik.servicebackendstolik.constants.swagger.IngredientSwagger
 @RestController
 @RequestMapping("/ingredients")
 @Tag(name = NAME_OF_INGREDIENT_CONTROLLER, description = DESCRIPTION_OF_INGREDIENT_CONTROLLER)
-
 public class IngredientController {
     private final IngredientService ingredientService;
 
@@ -58,9 +57,9 @@ public class IngredientController {
     @Operation(description = DESCRIPTION_OF_API_FOR_UPDATING_INGREDIENT)
     public ResponseEntity<Ingredient> update(@PathVariable  Long id, @RequestBody @Validated IngredientUpdateDto updateDto) {
         if (!updateDto.getId().equals(id))
-            throw new BodyObjectIdDoesNotMatchRequestIdException();
+            throw new BodyObjectIdDoesNotMatchRequestIdCustomException();
         if (!ingredientService.existsById(id))
-            throw new IngredientNotFoundException();
+            throw new IngredientNotFoundCustomException();
         return ResponseEntity.ok(ingredientService.update(updateDto));
     }
 }

@@ -17,6 +17,7 @@ import static kz.stolik.servicebackendstolik.constants.validation.EstablishmentT
 public @interface EstablishmentTypeName {
     String message() default ESTABLISHMENT_TYPE_NAME_ALREADY_EXISTS_MESSAGE;
     String field();
+    boolean required() default false;
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
