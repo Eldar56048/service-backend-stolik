@@ -3,7 +3,7 @@ package kz.stolik.servicebackendstolik.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kz.stolik.servicebackendstolik.exception.domain.BodyObjectIdDoesNotMatchRequestIdCustomException;
-import kz.stolik.servicebackendstolik.exception.domain.IngredientNotFoundCustomException;
+import kz.stolik.servicebackendstolik.exception.domain.IngredientNotFoundByIdException;
 import kz.stolik.servicebackendstolik.model.dto.IngredientCreateDto;
 import kz.stolik.servicebackendstolik.model.dto.IngredientUpdateDto;
 import kz.stolik.servicebackendstolik.model.dto.SearchCriteriaDto;
@@ -59,7 +59,7 @@ public class IngredientController {
         if (!updateDto.getId().equals(id))
             throw new BodyObjectIdDoesNotMatchRequestIdCustomException();
         if (!ingredientService.existsById(id))
-            throw new IngredientNotFoundCustomException();
+            throw new IngredientNotFoundByIdException();
         return ResponseEntity.ok(ingredientService.update(updateDto));
     }
 }

@@ -2,7 +2,7 @@ package kz.stolik.servicebackendstolik.service.impl;
 
 import kz.stolik.servicebackendstolik.exception.domain.CouldNotStoreFileException;
 import kz.stolik.servicebackendstolik.exception.domain.FileNameContainsInvalidPathSequenceException;
-import kz.stolik.servicebackendstolik.exception.domain.FileNotFoundException;
+import kz.stolik.servicebackendstolik.exception.domain.FileNotFoundByIdException;
 import kz.stolik.servicebackendstolik.model.entity.FileStorage;
 import kz.stolik.servicebackendstolik.model.repository.FileStorageRepository;
 import kz.stolik.servicebackendstolik.service.FileStorageService;
@@ -38,6 +38,6 @@ public class FileStorageStorageServiceImpl implements FileStorageService {
 
     @Override
     public FileStorage getByFileId(String fileId) {
-        return fileStorageRepository.findById(fileId).orElseThrow(() -> new FileNotFoundException());
+        return fileStorageRepository.findById(fileId).orElseThrow(() -> new FileNotFoundByIdException());
     }
 }

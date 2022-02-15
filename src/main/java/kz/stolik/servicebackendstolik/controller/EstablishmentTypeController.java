@@ -3,7 +3,7 @@ package kz.stolik.servicebackendstolik.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kz.stolik.servicebackendstolik.exception.domain.BodyObjectIdDoesNotMatchRequestIdCustomException;
-import kz.stolik.servicebackendstolik.exception.domain.EstablishmentTypeNotFoundCustomException;
+import kz.stolik.servicebackendstolik.exception.domain.EstablishmentTypeNotFoundByIdException;
 import kz.stolik.servicebackendstolik.model.dto.*;
 import kz.stolik.servicebackendstolik.model.entity.EstablishmentType;
 import kz.stolik.servicebackendstolik.service.EstablishmentTypeService;
@@ -53,7 +53,7 @@ public class EstablishmentTypeController {
         if (!updateDto.getId().equals(id))
             throw new BodyObjectIdDoesNotMatchRequestIdCustomException();
         if (!establishmentTypeService.existsById(id))
-            throw new EstablishmentTypeNotFoundCustomException();
+            throw new EstablishmentTypeNotFoundByIdException();
         return ResponseEntity.ok(establishmentTypeService.update(updateDto));
     }
 }
