@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader(TOKEN_HEADER);
+        /*String header = req.getHeader(TOKEN_HEADER);
         String username = null;
         String authToken = null;
         System.out.println(header);
@@ -80,14 +80,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.info("authenticated user " + username + ", setting security context");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-        }
+        }*/
 
         chain.doFilter(req, res);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathRequestMatcher("/users/**").matches(request) || new AntPathRequestMatcher("/auth").matches(request);
+        return
+                new AntPathRequestMatcher("/users/**").matches(request) ||
+                new AntPathRequestMatcher("/auth").matches(request) ||
+                new AntPathRequestMatcher("/swagger-ui/**").matches(request);
     }
 
 }

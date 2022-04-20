@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -52,6 +53,7 @@ public class TokenProvider implements Serializable {
 
         return Jwts.builder()
                 .setSubject(authentication.getName())
+                .setId(UUID.randomUUID().toString())
                 .claim(AUTHORITIES_KEY, authorities)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY*1000))
@@ -71,14 +73,13 @@ public class TokenProvider implements Serializable {
         final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
 
         final Claims claims = claimsJws.getBody();
-        userDetails.
 
         final Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, "12313", authorities);
     }
 
 }

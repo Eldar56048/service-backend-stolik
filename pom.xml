@@ -5,9 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
+		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>war</packaging>
 	<groupId>kz.stolik</groupId>
 	<artifactId>service-backend-stolik</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -15,6 +16,9 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<start-class>
+			kz.stolik.servicebackendstolik.ServiceBackendStolikApplication
+		</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -70,11 +74,40 @@
 			<version>2.4.4</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/antlr/antlr -->
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-el</artifactId>
+			<version>9.0.46</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.9</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -84,6 +117,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>demo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

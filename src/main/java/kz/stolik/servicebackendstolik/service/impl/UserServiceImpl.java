@@ -1,5 +1,6 @@
 package kz.stolik.servicebackendstolik.service.impl;
 
+import kz.stolik.servicebackendstolik.exception.domain.UserNotFoundByIdException;
 import kz.stolik.servicebackendstolik.exception.domain.UserNotFoundByPhoneNumberException;
 import kz.stolik.servicebackendstolik.model.dto.SearchCriteriaDto;
 import kz.stolik.servicebackendstolik.model.dto.UserCreateDto;
@@ -57,13 +58,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userRepository.getById(id);
+        return userRepository.findById(id).orElseThrow(UserNotFoundByIdException::new);
     }
 
     @Override
     public User update(UserUpdateDto userUpdateDto) {
         User user = getById(userUpdateDto.getId());
-        return user;
+        modelMapper.map(userUpdateDto, user);
+        return save(user);
     }
 
     @Override
@@ -78,6 +80,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loadUserByUsername(String username) {
-        return userRepository.getByPhoneNumber(username).orElseThrow(() -> new UserNotFoundByPhoneNumberException());
+        return userRepository.getByPhoneNumber(username).orElseThrow(UserNotFoundByPhoneNumberException::new);
+    }
+
+    @Override
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return userRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public boolean existsByPhoneNumberAndIdNot(String phoneNumber, Long id) {
+        return userRepository.existsByPhoneNumberAndIdNot(phoneNumber, id);
     }
 }
